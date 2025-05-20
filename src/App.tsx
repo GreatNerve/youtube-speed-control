@@ -180,7 +180,7 @@ function App() {
         </div>
       )}
 
-      <footer className="mt-6 mb-2">
+      {/* <footer className="mt-6 mb-2">
         <p className="text-xs text-gray-500 text-center">
           Made by{" "}
           <a
@@ -192,7 +192,7 @@ function App() {
             Dheeraj Sharma
           </a>
         </p>
-      </footer>
+      </footer> */}
     </section>
   );
 }

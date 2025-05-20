@@ -1,54 +1,62 @@
-# React + TypeScript + Vite
+# YouTube Speed Control
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight and customizable Chrome extension that enhances YouTube's playback speed menu. It allows you to fine-tune video speed beyond the default options using a configurable step size and maximum speed.
 
-Currently, two official plugins are available:
+> Boost your productivity while watching tutorials, lectures, or any videos at your preferred speed.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Add custom playback speed options to YouTube's existing speed menu
+- User-configurable:
+  - **Max Speed** (e.g., 5x)
+  - **Step Size** (e.g., 0.1x, 0.25x, etc.)
+- Remembers your last selected speed
+- Clean native-looking UI inside YouTube
+- Automatically removes old or duplicate menu entries
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## Installation
+
+### 1. Download and build
+
+```bash
+git clone https://github.com/GreatNerve/youtube-speed-control.git
+cd youtube-speed-control
+npm i
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Load Extension in Chrome
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+To install the extension manually in your browser:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+1. Open **Google Chrome**
+2. Visit: `chrome://extensions`
+3. Toggle **Developer mode** (top-right)
+4. Click **Load unpacked**
+5. Select the folder where you extracted the extension
+
+You should now see the extension in your extensions list, and it will be active on YouTube.
+
+---
+
+## Usage
+
+1. Open any YouTube video
+2. Click the ⚙ **Settings** icon in the player
+3. Open the **Playback speed** menu
+4. Choose from newly added custom speeds (e.g., 0.25x to 5x)
+
+The chosen speed is saved and auto-applied across videos.
+
+---
+
+## Repository
+
+GitHub - GreatNerve/youtube-speed-control
+
+---
+
