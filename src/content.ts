@@ -6,26 +6,40 @@ const applySpeed = (speed: number) => {
   }
 };
 
-chrome.storage.local.get(["currentSpeed"]).then((result) => {
-  if (result.currentSpeed !== undefined) {
-    applySpeed(result.currentSpeed);
+const waitForVideoAndApplySpeed = (speed: number) => {
+  const checkInterval = setInterval(() => {
+    const video = document.querySelector("video") as HTMLVideoElement | null;
+    if (video) {
+      video.playbackRate = speed;
+      console.log("[YT Speed Controller] Applied speed after URL change:", speed);
+      clearInterval(checkInterval);
+    }
+  }, 300);
+};
+
+const loadAndApplyStoredSpeed = () => {
+  chrome.storage.local.get(["currentSpeed"]).then((result) => {
+    if (result.currentSpeed !== undefined) {
+      waitForVideoAndApplySpeed(result.currentSpeed);
+    }
+  });
+};
+
+let lastUrl = location.href;
+
+setInterval(() => {
+  const currentUrl = location.href;
+  if (currentUrl !== lastUrl) {
+    lastUrl = currentUrl;
+    loadAndApplyStoredSpeed();
   }
-});
+}, 500);
+
+loadAndApplyStoredSpeed();
 
 chrome.runtime.onMessage.addListener((message) => {
   const { type, value } = message;
-
-  switch (type) {
-    case "SET_PLAYBACK_SPEED":
-      applySpeed(value);
-      break;
-
-    case "UPDATE_SPEED_SETTINGS":
-    case "UPDATE_STEP_SETTINGS":
-      console.log("[YT Speed Controller] Updated settings:", message);
-      break;
-
-    default:
-      console.warn("[YT Speed Controller] Unknown message type:", type);
+  if (type === "SET_PLAYBACK_SPEED") {
+    applySpeed(value);
   }
 });
